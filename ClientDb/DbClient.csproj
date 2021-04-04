@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientListener.cs" />
     <Compile Include="ServerConnect.cs" />
     <Compile Include="Messanger.cs">
       <SubType>Form</SubType>
