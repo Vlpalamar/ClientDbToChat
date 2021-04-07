@@ -20,14 +20,24 @@ namespace ClientDb
         {
             InitializeComponent();
             ServerConnect.getInstance();
-            //проверка на запуск
-            //RefreshUserList();
             ClientListener.addMessagePublic = GetMessage;
             ClientListener.refreshUserList = GetUsersList;
+            ClientListener.OnUser = GetUser;
 
-
+            //проверка на запуск
+            RefreshUserList();
         }
 
+        public void GetUser(User u)
+        {
+            currentUser = u;
+            if (currentUser != null)
+            {
+                Chat_txtBox.Text += currentUser.name;
+
+                RefreshUserList();
+            }
+        }
 
         public void RefreshUserList()
         {
@@ -60,29 +70,17 @@ namespace ClientDb
 
         private void LogIn_btn_Click(object sender, EventArgs e)
         {
-            currentUser = ServerConnect.getInstance()
+             ServerConnect.getInstance()
                 .LogIn(Email_txtBox.Text, Password_txtBox.Text);
 
-            if (currentUser != null)
-            {
-               
-                Chat_txtBox.Text += currentUser.name;
-                Users_listBox.Items.Add(currentUser);
-                RefreshUserList();
-            }
 
         }
 
         private void Reg_Btn_Click(object sender, EventArgs e)
         {
-            currentUser = ServerConnect.getInstance()
+             ServerConnect.getInstance()
                 .Reg(RegName_txtBox.Text, RegEMail_txtBox.Text, RegPassword_txtBox.Text);
-            if (currentUser != null)
-            {
-                Chat_txtBox.Text += currentUser.name;
-
-                RefreshUserList();
-            }
+           
         }
 
         private void Send_btn_Click(object sender, EventArgs e)
